@@ -68,7 +68,7 @@ const LoginForm = ({changeForm}) => {
 
       {/* onPress={changeForm} */}
       <TouchableOpacity style={styles.btnRegister}>
-        <Text style={styles.btnText}>Registrate</Text>
+        <Text style={[styles.btnText, {color:'#000'}]}>Registrate</Text>
       </TouchableOpacity>
     </>
   );

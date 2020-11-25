@@ -16,14 +16,18 @@ import {
   Image, 
   Animated, 
   Dimensions} from 'react-native';
-  import * as Animatable from 'react-native-animatable';
+import * as Animatable from 'react-native-animatable';
+
+//Se usara este componente despues 
 import Login from './src/Components/LoginForm';
 
 
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 
-
+//Obtener las dimensiones directamente de la pantalla
 const {width, height} = Dimensions.get('window');
+
+//Animación zoomIn
 const zoomIn = {
   1: {
     opacity: 1,
@@ -41,6 +45,7 @@ const zoomIn = {
   },
 };
 
+// Animación movimiento en Y
 const tranformY = {
   0:{
     translateY: 0,
@@ -51,62 +56,36 @@ const tranformY = {
 };
 
 const App: () => React$Node = () => {
-  console.disableYellowBox = true
-  const [fadeIn, setFadeIn] = useState(new Animated.Value(0));
-  const [fadeIn2, setFadeIn2] = useState(new Animated.Value(0));
-  const [fadeSlow, setFadeSlow] = useState(new Animated.Value(-20));
-  const [isAnimated, setIsAnimated] = useState(false);
-  React.useEffect(()=>{
-    if(!isAnimated)
-    {
 
-      Animated.timing(
-        fadeIn,
-        {
-          toValue: 1,
-          duration:1000
-        }
-        ).start();
-      Animated.timing(
-        fadeIn2,
-        {
-          toValue: 1,
-          duration:1000,
-          delay:1000,
-        }
-        ).start();
-        Animated.timing(
-          fadeSlow,
-          {
-            toValue: 0,
-            duration:1000,
-            
-          }
-          ).start();
-          setIsAnimated(true);
-        }
-        });
+  // Quitar los warnings
+  console.disableYellowBox = true
+
         return (
           <>
-      {/* <StatusBar barStyle="dark-content" />  Es para que los iconos de notificaciones sean negros */}
-      <View style={StyleSheet.absoluteFill}>
-        <Animatable.Image animation={tranformY}style={{flex: 1, height: null, width: null}} source={require('./src/Images/bg.png')}/>
-      </View>
-        <SafeAreaView style={styles.view}>
-          <Animatable.Image animation="fadeInUp" style={styles.logo} source={require('./src/Images/Logo.png')}/>
-          <Animatable.Text animation={zoomIn} delay={1000} style={{alignItems: "center", color: '#53d4ff', fontSize:50, fontWeight: 'bold', }}>
-              Novex
-          </Animatable.Text>
-          {/* <Login /> */}
-        </SafeAreaView>
-          cv
-          <View style={{height:height/3}}>
-              <Animatable.View animation="zoomIn"style={styles.button}>
-                  <Text style={{fontSize: 17, fontWeight:'bold', color:'#fff'}}>
-                        INICIA SESIÓN
-                  </Text>
-              </Animatable.View>  
-          </View>
+              {/* <StatusBar barStyle="dark-content" />  Es para que los iconos de notificaciones sean negros */}
+              
+              {/* Imagen de fondo */}
+              <View style={StyleSheet.absoluteFill}>
+                  <Animatable.Image animation={tranformY}style={{flex: 1, height: null, width: null}} source={require('./src/Images/bg.png')}/>
+              </View>
+
+              {/* Contenedor - Logo y texto */}
+              <SafeAreaView style={styles.view}>
+                  <Animatable.Image animation="fadeInUp" style={styles.logo} source={require('./src/Images/Logo.png')}/>
+                  <Animatable.Text animation={zoomIn} delay={1000} style={{alignItems: "center", color: '#53d4ff', fontSize:50, fontWeight: 'bold', }}>
+                      Novex
+                  </Animatable.Text>
+                  {/* <Login /> */}
+              </SafeAreaView>
+                  
+              {/* Boton iniciar sesón */}
+              <View style={{height:height/3}}>
+                  <Animatable.View animation="zoomIn"style={styles.button}>
+                      <Text style={{fontSize: 17, fontWeight:'bold', color:'#fff'}}>
+                          INICIA SESIÓN
+                      </Text>
+                  </Animatable.View>  
+              </View>
     </>
   );
 };
